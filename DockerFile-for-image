@@ -1,4 +1,5 @@
 FROM debian:latest
+MAINTAINER:stan@gobien.be
 
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
@@ -16,6 +17,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       php-sqlite3 \
       php-curl \
       tzdata \
+      cron \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings (hard coded for now)
@@ -28,4 +30,16 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
 # Ports
 EXPOSE 8081
 
-CMD ["bash"]
+# Create User & Rights
+
+# Install PVdiary2
+
+# Cronjobs
+RUN printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=120 >> /var/log/cron.log 2>&1' > /etc/cron.d/pvdiary2
+RUN printf '00 04 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1' >> /etc/cron.d/pvdiary2
+RUN chmod 0644 /etc/cron.d/pvdiary2
+RUN crontab /etc/cron.d/pvdiary2
+RUN touch /var/log/cron.log
+ 
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log

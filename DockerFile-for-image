@@ -1,0 +1,33 @@
+FROM debian:latest
+
+# Install deps
+RUN ["/bin/bash", "-c", "set -o pipefail \
+  && DEBIAN_FRONTEND=noninteractive \
+    apt update && apt install --assume-yes --no-install-recommends \
+      build-essential \
+      automake \
+      vim \
+      curl \
+      wget \
+      php-cli \
+      php-readline \
+      php-json \
+      php-zip \
+      php-sqlite3 \
+      php-curl \
+      tzdata \
+      openssh-server \
+  && rm -rf /var/lib/apt/lists/* ]
+
+# Time settings (hard coded for now)
+RUN rm /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+RUN ["/bin/bash", "-c", "set -o pipefail \
+  && PHPCONFPATH=$(php -i | grep "additional .ini files" |  grep -o '/[^ ]*') \
+  && printf '[PHP]\ndate.timezone = "Europe/Brussels"\n' > $PHPCONFPATH/90-timezone.ini ]
+  
+# Ports
+EXPOSE 8081
+EXPOSE 22
+
+CMD ["bash"]

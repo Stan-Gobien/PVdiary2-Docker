@@ -27,10 +27,9 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep "additional .ini files" |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = "Europe/Brussels"\n' > $PHPCONFPATH/90-timezone.ini ]
   
-# Ports
-EXPOSE 8081
+# Create User
+RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2
 
-# Create User & Rights
 
 # Install PVdiary2
 
@@ -40,6 +39,9 @@ RUN printf '00 04 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/
 RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log
+
+# Ports
+EXPOSE 8081
  
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log

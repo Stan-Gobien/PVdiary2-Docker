@@ -43,9 +43,9 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php install_pvdiary.php --list \ 
   && sudo -u pvdiary2 php install_pvdiary.php --unzip \
   && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp \
-  && cp temp/* /usr/local/bin/ -v
-  && rm -rf /home/pvdiary2/temp
-RUN sudo -u pvdiary2 pvdiary --check-env
+  && cp temp/* /usr/local/bin/ -v \
+  && rm -rf /home/pvdiary2/temp \
+  && sudo -u pvdiary2 pvdiary --check-env
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 RUN sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 

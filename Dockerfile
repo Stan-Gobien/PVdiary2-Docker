@@ -23,7 +23,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       sed \
       rclone \
       sudo \
-      ps \
+      procps \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings

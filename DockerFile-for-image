@@ -23,8 +23,11 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings (hard coded for now)
-RUN rm /etc/localtime
-RUN ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
+ENV TZ 'Europe/Brussels'
+RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# PHP time settings
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep "additional .ini files" |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = "Europe/Brussels"\n' > $PHPCONFPATH/90-timezone.ini ]

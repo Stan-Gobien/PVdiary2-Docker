@@ -83,9 +83,6 @@ RUN touch /var/log/cron.log
 # Ports
 EXPOSE 8082/tcp
 
-# Make /home/pvdiary2 a volume
-VOLUME /home/pvdiary2
-
 # Healthcheck
 #HEALTHCHECK --interval=5m --timeout=10s \
 #  CMD ps -aux | grep cron || exit 1

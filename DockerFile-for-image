@@ -18,6 +18,8 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       php-curl \
       tzdata \
       cron \
+      sed \
+      rclone \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings (hard coded for now)
@@ -30,8 +32,33 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
 # Create User
 RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2
 
-
 # Install PVdiary2
+RUN cd /home/pvdiary2
+RUN sudo -u pvdiary2 curl -o install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer
+RUN sudo -u pvdiary2 php install_pvdiary.php --download
+RUN sudo -u pvdiary2 php install_pvdiary.php --list
+RUN sudo -u pvdiary2 php install_pvdiary.php --unzip
+RUN sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp
+RUN cp temp/* /usr/local/bin/ -v
+RUN rm -rf /home/pvdiary2/temp
+RUN sudo -u pvdiary2 pvdiary --check-env
+RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
+
+# Start dashboard en CLI
+RUN sudo -u pvdiary2 toolbin --cliserver --start
+RUN sudo -u pvdiary2 pvdiary --httpd --dashboard --start
+
+# Demo config PVdiary2
+RUN sudo -u pvdiary2 pvdiary --plugin=config --create-demo
+RUN sudo -u pvdiary2 pvdiary --db --make-tables --init
+RUN sudo -u pvdiary2 pvdiary --import --start-date=day1
+RUN sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
+RUN sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
+RUN sudo -u pvdiary2 pvdiary --export --info --expected --top
+
+# Autorun config
+RUN sed -i 's/; exec_at_start[] = "pvdiary --httpd --dashboard --start"/ exec_at_start[] = "pvdiary --httpd --dashboard --start"/g' /home/pvdiary2/etc/pvdiary.cfg
+RUN sed -i 's/; exec_at_start[] = "toolbin --cliserver --start"/ exec_at_start[] = "toolbin --cliserver --start"/g' /home/pvdiary2/etc/pvdiary.cfg
 
 # Cronjobs
 RUN printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=120 >> /var/log/cron.log 2>&1' > /etc/cron.d/pvdiary2
@@ -40,8 +67,13 @@ RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log
 
+# Rclone
+RUN sudo -u pvdiary2 rclone config create localfs local
+RUN sudo -u pvdiary2 rclone config create pvdiary ftp host 
+
 # Ports
-EXPOSE 8081
+EXPOSE 8082
  
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log
+

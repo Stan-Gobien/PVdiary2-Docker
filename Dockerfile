@@ -22,6 +22,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       cron \
       sed \
       rclone \
+      sudo \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings

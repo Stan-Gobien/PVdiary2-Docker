@@ -22,10 +22,9 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       rclone \
   && rm -rf /var/lib/apt/lists/* ]
 
-# Time settings (hard coded for now)
+# Time settings
 ENV TZ 'Europe/Brussels'
-RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-RUN dpkg-reconfigure -f noninteractive tzdata
+RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 # PHP time settings
 RUN ["/bin/bash", "-c", "set -o pipefail \
@@ -36,14 +35,14 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
 RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2
 
 # Install PVdiary2
-RUN cd /home/pvdiary2
-RUN sudo -u pvdiary2 curl -o install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer
-RUN sudo -u pvdiary2 php install_pvdiary.php --download
-RUN sudo -u pvdiary2 php install_pvdiary.php --list
-RUN sudo -u pvdiary2 php install_pvdiary.php --unzip
-RUN sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp
-RUN cp temp/* /usr/local/bin/ -v
-RUN rm -rf /home/pvdiary2/temp
+RUN cd /home/pvdiary2 \
+  && sudo -u pvdiary2 curl -o install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \
+  && sudo -u pvdiary2 php install_pvdiary.php --download \
+  && sudo -u pvdiary2 php install_pvdiary.php --list \ 
+  && sudo -u pvdiary2 php install_pvdiary.php --unzip \
+  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp \
+  && cp temp/* /usr/local/bin/ -v
+  && rm -rf /home/pvdiary2/temp
 RUN sudo -u pvdiary2 pvdiary --check-env
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 

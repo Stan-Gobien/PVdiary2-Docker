@@ -1,5 +1,7 @@
 FROM debian:latest
-MAINTAINER:stan@gobien.be
+
+LABEL maintainer="stan@gobien.be"
+LABEL com.centurylinklabs.watchtower.enable="false"
 
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
@@ -23,14 +25,14 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && rm -rf /var/lib/apt/lists/* ]
 
 # Time settings
-ENV TZ 'Europe/Brussels'
+ENV TZ=Europe/Brussels
 RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 # PHP time settings
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep "additional .ini files" |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = "Europe/Brussels"\n' > $PHPCONFPATH/90-timezone.ini ]
-  
+
 # Create User
 RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2
 
@@ -45,6 +47,7 @@ RUN cd /home/pvdiary2 \
   && rm -rf /home/pvdiary2/temp
 RUN sudo -u pvdiary2 pvdiary --check-env
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
+RUN sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 
 # Start dashboard en CLI
 RUN sudo -u pvdiary2 toolbin --cliserver --start
@@ -65,17 +68,29 @@ RUN sed -i 's/; exec_at_start[] = "toolbin --cliserver --start"/ exec_at_start[]
 # Cronjobs
 RUN printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=120 >> /var/log/cron.log 2>&1' > /etc/cron.d/pvdiary2
 RUN printf '00 04 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1' >> /etc/cron.d/pvdiary2
+RUN printf '00 12 * * 6 pvdiary2 /usr/local/bin/pvdiary --plugin=update-sw --code-php --code-www >> /var/log/cron.log 2>&1' >> /etc/cron.d/pvdiary2
 RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log
 
-# Rclone
-RUN sudo -u pvdiary2 rclone config create localfs local
-RUN sudo -u pvdiary2 rclone config create pvdiary ftp host 
+# Rclone, to difficult to include at build time, will have to create at RUN time
+#ENV TYPE=ftp
+#ENV HOST=
+#ENV USER=
+#ENV PASS=
+#RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user www.gobien.be pass
 
 # Ports
-EXPOSE 8082
- 
+EXPOSE 8082/tcp
+
+# Make /home/pvdiary2 a volume
+VOLUME /home/pvdiary2
+
+# Healthcheck
+#HEALTHCHECK --interval=5m --timeout=10s \
+#  CMD ps -aux | grep cron || exit 1
+
+
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log
 

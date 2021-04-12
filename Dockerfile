@@ -23,6 +23,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       sudo \
       procps \
       ca-certificates \
+      > /dev/null 2>&1
   && rm -rf /var/lib/apt/lists/*"]
 
 # Time settings

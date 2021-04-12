@@ -75,7 +75,7 @@ RUN sed -i "s/\; exec_at_start\[] = \"toolbin / exec_at_start\[] = \"toolbin /g"
 # Cronjobs
 RUN printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=120 >> /var/log/cron.log 2>&1' > /etc/cron.d/pvdiary2
 RUN printf '00 04 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1' >> /etc/cron.d/pvdiary2
-RUN printf '00 12 * * 6 pvdiary2 /usr/local/bin/pvdiary --plugin=update-sw --code-php --code-www >> /var/log/cron.log 2>&1' >> /etc/cron.d/pvdiary2
+RUN printf '00 12 * * 6 pvdiary2 /usr/local/bin/pvdiary --plugin=update-sw --code-php --code-www >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2
 RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log

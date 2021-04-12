@@ -3,8 +3,6 @@ FROM debian:latest
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
-VOLUME /home/pvdiary2
-
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \

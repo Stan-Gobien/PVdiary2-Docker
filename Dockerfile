@@ -69,8 +69,8 @@ RUN sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
 RUN sudo -u pvdiary2 pvdiary --export --info --expected --top
 
 # Autorun config
-RUN sed -i 's/; exec_at_start[] = "pvdiary --httpd --dashboard --start"/ exec_at_start[] = "pvdiary --httpd --dashboard --start"/g' /home/pvdiary2/etc/pvdiary.cfg
-RUN sed -i 's/; exec_at_start[] = "toolbin --cliserver --start"/ exec_at_start[] = "toolbin --cliserver --start"/g' /home/pvdiary2/etc/pvdiary.cfg
+RUN sed -i 's/; exec_at_start[] = "pvdiary/ exec_at_start[] = "pvdiary/g' /home/pvdiary2/etc/pvdiary.cfg
+RUN sed -i 's/; exec_at_start[] = "toolbin/ exec_at_start[] = "toolbin/g' /home/pvdiary2/etc/pvdiary.cfg
 
 # Cronjobs
 RUN printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=120 >> /var/log/cron.log 2>&1' > /etc/cron.d/pvdiary2

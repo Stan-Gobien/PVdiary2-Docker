@@ -36,7 +36,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini" ]
 
 # Create User
-RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2
+RUN adduser --disabled-password --home /home/pvdiary2 pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \

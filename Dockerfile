@@ -45,7 +45,7 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php install_pvdiary.php --unzip
 RUN sed -i 's/if (!self::g_ask_yn(" Continue with these settings (Enter Y or N followed by <cr>) ? "))  return;/return;/g' /home/pvdiary2/incl/tlbn__setup.php
 RUN cd /home/pvdiary2 \
-  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp
+  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=/home/pvdiary2/temp
 RUN cp /home/pvdiary2/temp/* /usr/local/bin/ -v && rm -rf /home/pvdiary2/temp
 RUN sudo -u pvdiary2 pvdiary --check-env
 

@@ -7,8 +7,6 @@ LABEL com.centurylinklabs.watchtower.enable="false"
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \
     apt update && apt install --assume-yes --no-install-recommends \
-      build-essential \
-      automake \
       vim \
       curl \
       wget \
@@ -24,6 +22,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       rclone \
       sudo \
       procps \
+      ca-certificates \
   && rm -rf /var/lib/apt/lists/*"]
 
 # Time settings
@@ -36,7 +35,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
 
 # Create User
-RUN adduser --disabled-password --home /home/pvdiary2 pvdiary2
+RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \

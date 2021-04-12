@@ -44,8 +44,10 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php install_pvdiary.php --list \ 
   && sudo -u pvdiary2 php install_pvdiary.php --unzip
 RUN sed -i 's/if (!self::g_ask_yn(" Continue with these settings (Enter Y or N followed by <cr>) ? "))  return;/return;/g' /home/pvdiary2/incl/tlbn__setup.php
-RUN sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp
-RUN cp temp/* /usr/local/bin/ -v && rm -rf /home/pvdiary2/temp && sudo -u pvdiary2 pvdiary --check-env
+RUN cd /home/pvdiary2 \
+  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=temp
+RUN cp /home/pvdiary2/temp/* /usr/local/bin/ -v && rm -rf /home/pvdiary2/temp
+RUN sudo -u pvdiary2 pvdiary --check-env
 
 # Change PVDiary settings for dashboard accessible from anywhere and remove login/password need
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php

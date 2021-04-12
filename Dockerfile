@@ -24,7 +24,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
       rclone \
       sudo \
       procps \
-  && rm -rf /var/lib/apt/lists/* ]
+  && rm -rf /var/lib/apt/lists/*"]
 
 # Time settings
 ENV TZ=Europe/Brussels

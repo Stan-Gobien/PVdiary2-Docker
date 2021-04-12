@@ -3,6 +3,8 @@ FROM debian:latest
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
+VOLUME /home/pvdiary2
+
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \
@@ -45,9 +47,10 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php install_pvdiary.php --unzip
 RUN sed -i 's/if (!self::g_ask_yn(" Continue with these settings (Enter Y or N followed by <cr>) ? "))  return;/return;/g' /home/pvdiary2/incl/tlbn__setup.php
 RUN cd /home/pvdiary2 \
-  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=/home/pvdiary2/temp
-RUN cp /home/pvdiary2/temp/* /usr/local/bin/ -v && rm -rf /home/pvdiary2/temp
-RUN sudo -u pvdiary2 pvdiary --check-env
+  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=/home/pvdiary2/temp \
+  && cp /home/pvdiary2/temp/* /usr/local/bin/ -v \
+  && rm -rf /home/pvdiary2/temp \ 
+  && sudo -u pvdiary2 pvdiary --check-env
 
 # Change PVDiary settings for dashboard accessible from anywhere and remove login/password need
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php

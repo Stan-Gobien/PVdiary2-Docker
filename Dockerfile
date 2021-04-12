@@ -32,8 +32,8 @@ RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-
 
 # PHP time settings
 RUN ["/bin/bash", "-c", "set -o pipefail \
-  && PHPCONFPATH=$(php -i | grep "additional .ini files" |  grep -o '/[^ ]*') \
-  && printf '[PHP]\ndate.timezone = "Europe/Brussels"\n' > $PHPCONFPATH/90-timezone.ini" ]
+  && PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*') \
+  && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini" ]
 
 # Create User
 RUN adduser -d /home/pvdiary2 -U -m -p pvdiary2 pvdiary2

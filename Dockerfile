@@ -34,6 +34,9 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
 
+# Volume
+VOLUME /home/pvdiary2
+
 # Create User
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
 
@@ -93,9 +96,6 @@ EXPOSE 8082/tcp
 # Healthcheck
 #HEALTHCHECK --interval=5m --timeout=10s \
 #  CMD ps -aux | grep cron || exit 1
-
-
-VOLUME /home
 
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log

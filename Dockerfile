@@ -34,16 +34,17 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
 
-# Volume
-VOLUME /home/pvdiary2
-
 # Create User
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
+
+# Volume
+VOLUME /home/pvdiary2
 RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -alth /home
 
 # Install PVdiary2
-RUN sudo -u pvdiary2 cd /home/pvdiary2 \
-  && sudo -u pvdiary2 curl -o install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \
+RUN cd /home/pvdiary2 \
+  && pwd \
+  && sudo -u pvdiary2 curl -o /home/pvdiary2/install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \
   && sudo -u pvdiary2 php install_pvdiary.php --download \
   && sudo -u pvdiary2 php install_pvdiary.php --list \ 
   && sudo -u pvdiary2 php install_pvdiary.php --unzip

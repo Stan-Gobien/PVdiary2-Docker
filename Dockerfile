@@ -50,7 +50,7 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --download \
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --list \ 
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --unzip
-RUN ls - alth /home/pvdiary2/incl/tlbn__setup.php && sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
+RUN ls -alth /home/pvdiary2/incl/tlbn__setup.php && sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
 RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 mkdir /home/pvdiary2/temp \
   && chmod 777 /home/pvdiary2/temp \

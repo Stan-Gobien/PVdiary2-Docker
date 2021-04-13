@@ -1,5 +1,7 @@
 FROM debian:latest as debian-php
 
+LABEL com.centurylinklabs.watchtower.enable="true"
+
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \
@@ -41,7 +43,7 @@ RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group p
 
 # Volume
 VOLUME /home/pvdiary2
-RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -alth /home && ls -alth /home/pvdiary2
+RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -al /home && ls -al /home/pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \
@@ -50,12 +52,12 @@ RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --download \
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --list \ 
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --unzip
-RUN ls -alth /home/pvdiary2/incl/tlbn__setup.php && sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
+RUN ls -al /home/pvdiary2/incl/tlbn__setup.php && sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
 RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 mkdir /home/pvdiary2/temp \
   && chmod 777 /home/pvdiary2/temp \
   && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --setup --CLI=/home/pvdiary2/temp \
-  && ls -alth /home/pvdiary2/temp \
+  && ls -al /home/pvdiary2/temp \
   && cp /home/pvdiary2/temp/* /usr/local/bin/ -v \
   && sudo -u pvdiary2 pvdiary --check-env
 

@@ -1,7 +1,4 @@
-FROM debian:latest
-
-LABEL maintainer="stan@gobien.be"
-LABEL com.centurylinklabs.watchtower.enable="false"
+FROM debian:latest as debian-php
 
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
@@ -33,6 +30,11 @@ RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && dpkg-
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
+  
+FROM debian-php as debian-php-pvdiary
+
+LABEL maintainer="stan@gobien.be"
+LABEL com.centurylinklabs.watchtower.enable="false"
 
 # Create User
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
@@ -100,5 +102,4 @@ EXPOSE 8082/tcp
 #  CMD ps -aux | grep cron || exit 1
 
 # Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
-
+CMD cron >> /var/log/cron.log && tail -f /var/log/cron.log

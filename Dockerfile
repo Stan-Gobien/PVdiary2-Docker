@@ -3,8 +3,6 @@ FROM debian:latest
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
-VOLUME /home
-
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \
@@ -96,6 +94,8 @@ EXPOSE 8082/tcp
 #HEALTHCHECK --interval=5m --timeout=10s \
 #  CMD ps -aux | grep cron || exit 1
 
+
+VOLUME /home
 
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log

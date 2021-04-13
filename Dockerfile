@@ -42,7 +42,7 @@ RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group p
 RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -alth /home
 
 # Install PVdiary2
-RUN cd /home/pvdiary2 \
+RUN sudo -u pvdiary2 cd /home/pvdiary2 \
   && sudo -u pvdiary2 curl -o install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \
   && sudo -u pvdiary2 php install_pvdiary.php --download \
   && sudo -u pvdiary2 php install_pvdiary.php --list \ 

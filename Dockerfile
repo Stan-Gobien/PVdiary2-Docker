@@ -39,6 +39,7 @@ VOLUME /home/pvdiary2
 
 # Create User
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
+RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \

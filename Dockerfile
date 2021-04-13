@@ -31,7 +31,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*') \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
   
-FROM debian-php as debian-php-pvdiary
+FROM debian-php as debian-php-pvdiary-install
 
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
@@ -41,20 +41,20 @@ RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group p
 
 # Volume
 VOLUME /home/pvdiary2
-RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -alth /home
+RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod 755 /home/pvdiary2 && ls -alth /home && ls -alth /home/pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \
   && pwd \
   && sudo -u pvdiary2 curl -o /home/pvdiary2/install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \
-  && sudo -u pvdiary2 php install_pvdiary.php --download \
-  && sudo -u pvdiary2 php install_pvdiary.php --list \ 
-  && sudo -u pvdiary2 php install_pvdiary.php --unzip
-RUN sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
+  && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --download \
+  && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --list \ 
+  && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --unzip
+RUN ls - alth /home/pvdiary2/incl/tlbn__setup.php && sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
 RUN cd /home/pvdiary2 \
   && sudo -u pvdiary2 mkdir /home/pvdiary2/temp \
   && chmod 777 /home/pvdiary2/temp \
-  && sudo -u pvdiary2 php install_pvdiary.php --setup --CLI=/home/pvdiary2/temp \
+  && sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --setup --CLI=/home/pvdiary2/temp \
   && ls -alth /home/pvdiary2/temp \
   && cp /home/pvdiary2/temp/* /usr/local/bin/ -v \
   && sudo -u pvdiary2 pvdiary --check-env
@@ -62,6 +62,8 @@ RUN cd /home/pvdiary2 \
 # Change PVDiary settings for dashboard accessible from anywhere and remove login/password need
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 RUN sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
+
+FROM debian-php-pvdiary-install as debian-php-pvdiary-install-demo
 
 # Start PVdiary dashboard & CLI
 RUN sudo -u pvdiary2 toolbin --cliserver --start

@@ -3,6 +3,8 @@ FROM debian:latest
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
+VOLUME /home
+
 # Install deps
 RUN ["/bin/bash", "-c", "set -o pipefail \
   && DEBIAN_FRONTEND=noninteractive \
@@ -36,8 +38,6 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
 
 # Create User
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
-
-VOLUME /home/pvdiary2
 
 # Install PVdiary2
 RUN cd /home/pvdiary2 \

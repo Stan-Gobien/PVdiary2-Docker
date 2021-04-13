@@ -42,7 +42,7 @@ LABEL com.centurylinklabs.watchtower.enable="false"
 RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
 
 # Volume
-VOLUME /home/pvdiary2
+#VOLUME /home/pvdiary2
 
 # Home dir
 RUN mkdir /home/pvdiary2/incl && mkdir /home/pvdiary2/httpd

@@ -76,14 +76,6 @@ FROM debian-php-pvdiary-install as debian-php-pvdiary-install-demo
 RUN sudo -u pvdiary2 toolbin --cliserver --start
 RUN sudo -u pvdiary2 pvdiary --httpd --dashboard --start
 
-# Demo config PVdiary2
-RUN sudo -u pvdiary2 pvdiary --plugin=config --create-demo
-RUN sudo -u pvdiary2 pvdiary --db --make-tables --init
-RUN sudo -u pvdiary2 pvdiary --import --start-date=day1
-RUN sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
-RUN sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
-RUN sudo -u pvdiary2 pvdiary --export --info --expected --top
-
 # Autorun config
 RUN sed -i "s/\; exec_at_start\[] = \"pvdiary / exec_at_start\[] = \"pvdiary /g" /home/pvdiary2/etc/pvdiary.cfg
 RUN sed -i "s/\; exec_at_start\[] = \"toolbin / exec_at_start\[] = \"toolbin /g" /home/pvdiary2/etc/pvdiary.cfg
@@ -96,12 +88,6 @@ RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log
 
-# Rclone, to difficult to include at build time, will have to create at RUN time
-#ENV TYPE=ftp
-#ENV HOST=
-#ENV USER=
-#ENV PASS=
-#RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user www.gobien.be pass
 
 # Ports
 EXPOSE 8082/tcp

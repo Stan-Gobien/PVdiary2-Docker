@@ -70,12 +70,6 @@ RUN cd /home/pvdiary2 \
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 RUN sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 
-FROM debian-php-pvdiary-install as debian-php-pvdiary-install-demo
-
-# Start PVdiary dashboard & CLI
-RUN sudo -u pvdiary2 toolbin --cliserver --start
-RUN sudo -u pvdiary2 pvdiary --httpd --dashboard --start
-
 # Autorun config
 RUN sed -i "s/\; exec_at_start\[] = \"pvdiary / exec_at_start\[] = \"pvdiary /g" /home/pvdiary2/etc/pvdiary.cfg
 RUN sed -i "s/\; exec_at_start\[] = \"toolbin / exec_at_start\[] = \"toolbin /g" /home/pvdiary2/etc/pvdiary.cfg
@@ -88,7 +82,6 @@ RUN chmod 0644 /etc/cron.d/pvdiary2
 RUN crontab /etc/cron.d/pvdiary2
 RUN touch /var/log/cron.log
 
-
 # Ports
 EXPOSE 8082/tcp
 
@@ -96,5 +89,13 @@ EXPOSE 8082/tcp
 #HEALTHCHECK --interval=5m --timeout=10s \
 #  CMD ps -aux | grep cron || exit 1
 
+# Start PVdiary dashboard & CLI
+RUN sudo -u pvdiary2 toolbin --cliserver --start
+RUN sudo -u pvdiary2 pvdiary --httpd --dashboard --start
+
+#Copy runtime scripts
+RUN curl -o /FirstRun.sh https://github.com/Stan-Gobien/PVdiary2-Docker/raw/main/FirstRun.sh && chmod +x /FirstRun.sh
+RUN curl -o /StartUp.sh https://github.com/Stan-Gobien/PVdiary2-Docker/raw/main/StartUp.sh && chmod +x /StartUp.sh
+
 # Run the command on container startup
-CMD cron >> /var/log/cron.log && tail -f /var/log/cron.log
+CMD /StartUp.sh

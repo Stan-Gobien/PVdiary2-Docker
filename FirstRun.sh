@@ -14,6 +14,3 @@ sudo -u pvdiary2 pvdiary --export --info --expected --top
 #ENV USER=
 #ENV PASS=
 #RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user www.gobien.be pass
-
-
-CMD cron >> /var/log/cron.log && tail -f /var/log/cron.log

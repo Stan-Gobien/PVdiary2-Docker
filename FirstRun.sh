@@ -16,4 +16,4 @@ sudo -u pvdiary2 pvdiary --export --info --expected --top
 #RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user www.gobien.be pass
 
 # Create file to let startup know config is done
-touch /home/pvdiary2/.firstrunfinished
+sudo -u pvdiary2 touch /home/pvdiary2/.firstrunfinished

@@ -1,5 +1,4 @@
 FROM debian:latest as debian-php
-
 LABEL com.centurylinklabs.watchtower.enable="true"
 
 # Install deps
@@ -34,7 +33,6 @@ RUN ["/bin/bash", "-c", "set -o pipefail \
   && printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini"]
   
 FROM debian-php as debian-php-pvdiary-install
-
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 

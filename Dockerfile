@@ -48,7 +48,8 @@ RUN groupadd -g 5000 pvdiary2
 RUN useradd -d /home/pvdiary2 -u 5000 -g 5000 -M -N -s /bin/bash pvdiary2
 
 # Home dir
-RUN mkdir /home/pvdiary2/incl && mkdir /home/pvdiary2/httpd
+RUN mkdir /home/pvdiary2/incl
+RUN mkdir /home/pvdiary2/httpd
 RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod -R 755 /home/pvdiary2
 RUN ls -al /home && ls -al /home/pvdiary2  
 

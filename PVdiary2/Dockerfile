@@ -16,6 +16,9 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh /bin/entrypoint.sh
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh /bin/install.sh
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh /bin/firstrun.sh
+RUN chmod +x /bin/entrypoint.sh
+RUN chmod +x /bin/install.sh
+RUN chmod +x /bin/firstrun.sh
 
 ## Set it as your entrypoint
 ENTRYPOINT [ "/bin/entrypoint.sh" ]

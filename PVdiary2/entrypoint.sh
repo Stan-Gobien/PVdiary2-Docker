@@ -19,14 +19,17 @@ else
     echo "Running PVdiary configuration via FirstRun.sh"
     /bin/firstrun.sh
 fi
-    echo "Now starting CLI/dashboard & cron."
-    sudo -u pvdiary2 toolbin --cliserver --start
-    sudo -u pvdiary2 pvdiary --httpd --dashboard --start
-    /usr/sbin/cron >> /var/log/cron.log &
-    tail -f /var/log/cron.log
- 
+
+echo "Now starting CLI/dashboard & cron."
+sudo -u pvdiary2 toolbin --cliserver --start
+sudo -u pvdiary2 pvdiary --httpd --dashboard --start
+
+/usr/sbin/cron >> /var/log/cron.log &
+sudo -u pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 &
 
 ## Running passed command
 if [[ "$1" ]]; then
         eval "$@"
 fi
+
+tail -f /var/log/cron

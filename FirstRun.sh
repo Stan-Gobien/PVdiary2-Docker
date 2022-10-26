@@ -13,7 +13,7 @@ sudo -u pvdiary2 pvdiary --export --info --expected --top
 #ENV HOST=
 #ENV USER=
 #ENV PASS=
-#RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user www.gobien.be pass
+#RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user xxxx pass yyyyy
 
 # Create file to let startup know config is done
 sudo -u pvdiary2 touch /home/pvdiary2/.firstrunfinished

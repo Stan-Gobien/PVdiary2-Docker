@@ -47,10 +47,6 @@ echo Change PVdiary2 settings to dashboard accessible from anywhere and remove l
 sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 
-echo Autorun config
-sed -i "s/\; exec_at_start\[] = \"pvdiary / exec_at_start\[] = \"pvdiary /g" /home/pvdiary2/etc/pvdiary.cfg
-sed -i "s/\; exec_at_start\[] = \"toolbin / exec_at_start\[] = \"toolbin /g" /home/pvdiary2/etc/pvdiary.cfg
-
 echo Cronjobs
 printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=20 >> /var/log/cron.log 2>&1 \n' > /etc/cron.d/pvdiary2
 printf '0 4 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2

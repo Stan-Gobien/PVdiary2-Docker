@@ -1,4 +1,4 @@
-FROM php:7-bullseye as pvdiary2:bullseye
+FROM php:7-bullseye
 
 #Nameserver
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/resolv.conf /etc/resolv.conf

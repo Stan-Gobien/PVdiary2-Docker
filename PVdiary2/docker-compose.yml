@@ -4,13 +4,13 @@ services:
   # https://docs.portainer.io/v/ce-2.9/faq/troubleshooting/can-i-build-an-image-while-deploying-a-stack-application-from-git
   # Workaround Use the link to the build file in the portainer build image editor and name it php-8-fpm-custom-ares:latest
   # Then deploy the stack succesfully
-    build: https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/Dockerfile
-    image: pvdiary2:latest
+    build: https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/Dockerfile
+    image: pvdiary2:bullseye
     restart: always
     mem_limit: 256m
     memswap_limit: 1024m
     volumes:
-      - /data/containers/pvdiary2:/home/pvdiary2:Z
+      - /data/containers/pvdiary2/data:/home
     tmpfs:
       - /tmp
     labels:

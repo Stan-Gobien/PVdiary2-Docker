@@ -45,5 +45,5 @@ chmod 0644 /etc/cron.d/pvdiary2
 crontab /etc/cron.d/pvdiary2
 touch /var/log/cron.log
 
-# Create file to let startup know install is done
+# Create file to let startup know install is already done
 touch /var/.installfinished

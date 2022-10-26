@@ -18,4 +18,4 @@ ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh /bin/firstrun.sh
 
 ## Set it as your entrypoint
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/bin/entrypoint.sh" ]

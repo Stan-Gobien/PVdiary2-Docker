@@ -39,7 +39,12 @@ sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --setup --CLI=/home/pvdi
 
 echo List conent of /home/pvdiary2/temp for debug reasons
 ls -al /home/pvdiary2/temp
-cp /home/pvdiary2/temp/* /usr/local/bin/ -v
+cp /home/pvdiary2/temp/toolbin /usr/local/bin/toolbin
+cp /home/pvdiary2/temp/pvdiary /usr/local/bin/pvdiary
+chmod +x /usr/local/bin/pvdiary
+chmod +x /usr/local/bin/toolbin
+
+echo Check PVdiary2 env
 sudo -u pvdiary2 /usr/local/bin/pvdiary --check-env
 
 echo Change PVdiary2 settings to dashboard accessible from anywhere and remove login/password need

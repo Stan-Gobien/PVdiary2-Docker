@@ -1,3 +1,11 @@
+# Time settings
+TZ=Europe/Brussels
+dpkg-reconfigure -f noninteractive tzdata
+
+# PHP time settings
+PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*')
+printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini
+
 # Home dir
 mkdir /home/pvdiary2
 

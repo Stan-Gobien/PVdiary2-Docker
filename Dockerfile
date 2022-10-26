@@ -39,7 +39,7 @@ LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
 # Volume
-#VOLUME /home/pvdiary2
+VOLUME /home/pvdiary2
 
 # Create Group
 RUN groupadd -g 5000 pvdiary2

@@ -44,6 +44,9 @@ cp -v /home/pvdiary2/temp/pvdiary /usr/local/bin/pvdiary
 chmod +x /usr/local/bin/pvdiary
 chmod +x /usr/local/bin/toolbin
 
+echo List conent of /usr/local/bin/ for debug reasons
+ls -al /usr/local/bin/
+
 echo Check PVdiary2 env
 sudo -u pvdiary2 /usr/local/bin/pvdiary --check-env
 

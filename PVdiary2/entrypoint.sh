@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-## Run startup command
-#echo "Hello ENTRYPOINT" >> hello
+## Running passed command
+if [[ "$1" ]]; then
+        eval "$@"
+fi
 
 FILE=/var/.installfinished
 if [ -f "$FILE" ]; then
@@ -26,10 +28,5 @@ sudo -u pvdiary2 pvdiary --httpd --dashboard --start
 
 /usr/sbin/cron >> /var/log/cron.log &
 sudo -u pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 &
-
-## Running passed command
-if [[ "$1" ]]; then
-        eval "$@"
-fi
 
 tail -f /var/log/cron

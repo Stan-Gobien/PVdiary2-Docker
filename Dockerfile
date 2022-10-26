@@ -41,19 +41,19 @@ LABEL com.centurylinklabs.watchtower.enable="false"
 # Volume
 VOLUME /home/pvdiary2
 
+# Home dir
+RUN mkdir /home/pvdiary2
+
 # Create Group
 RUN groupadd -g 5000 pvdiary2
 
 # Create User
 RUN useradd -d /home/pvdiary2 -u 5000 -g 5000 -M -N -s /bin/bash pvdiary2
 
-# Home dir
-RUN mkdir /home/pvdiary2/incl
-RUN mkdir /home/pvdiary2/httpd
+# Install PVdiary2
+RUN mkdir /home/pvdiary2/incl && mkdir /home/pvdiary2/httpd
 RUN chown -R pvdiary2:pvdiary2 /home/pvdiary2 && chmod -R 755 /home/pvdiary2
 RUN ls -al /home && ls -al /home/pvdiary2  
-
-# Install PVdiary2
 RUN cd /home/pvdiary2 \
   && pwd \
   && sudo -u pvdiary2 curl -o /home/pvdiary2/install_pvdiary.php https://www.aps11tl.be/download.php?id=pvdiary_installer \

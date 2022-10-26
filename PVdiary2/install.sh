@@ -61,5 +61,5 @@ touch /var/log/cron.log
 #ENV PASS=
 #RUN sudo -u pvdiary2 rclone config create pvdiary ftp host www.gobien.be user xxxx pass yyyyy
 
-# Create file to let startup know firstrun is done
-sudo -u pvdiary2 touch /home/pvdiary2/.firstrunfinished
+# Create file to let startup know install is done
+sudo -u pvdiary2 touch /var/.installfinished

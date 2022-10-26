@@ -4,11 +4,19 @@ set -e
 ## Run startup command
 #echo "Hello ENTRYPOINT" >> hello
 
+FILE=/var/.installfinished
+if [ -f "$FILE" ]; then
+    echo "PVDiary has already been installed. $FILE exists."
+else
+    echo "Running PVdiary installation via installn.sh"
+    /bin/install.sh
+fi
+
 FILE=/home/pvdiary2/.firstrunfinished
 if [ -f "$FILE" ]; then
-    echo "PVDiary has already been configured. $FILE exists."
+    echo "PVdiary has already been configured. $FILE exists."
 else 
-    echo "Running PVDiary configuration via FirstRun.sh"
+    echo "Running PVdiary configuration via FirstRun.sh"
     /bin/firstrun.sh
 fi
     echo "Now starting CLI/dashboard & cron."

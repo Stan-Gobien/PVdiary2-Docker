@@ -38,11 +38,14 @@ FROM debian-php as debian-php-pvdiary-install
 LABEL maintainer="stan@gobien.be"
 LABEL com.centurylinklabs.watchtower.enable="false"
 
-# Create User
-RUN useradd --create-home --home /home/pvdiary2 --shell /bin/bash --user-group pvdiary2
-
 # Volume
 #VOLUME /home/pvdiary2
+
+# Create Group
+RUN groupadd -g 5000 pvdiary2
+
+# Create User
+RUN useradd -d /home/pvdiary2 -u 5000 -g 5000 -M -N -s /bin/bash pvdiary2
 
 # Home dir
 RUN mkdir /home/pvdiary2/incl && mkdir /home/pvdiary2/httpd
@@ -66,7 +69,8 @@ RUN cd /home/pvdiary2 \
   && cp /home/pvdiary2/temp/* /usr/local/bin/ -v \
   && sudo -u pvdiary2 pvdiary --check-env
 
-# Change PVDiary settings for dashboard accessible from anywhere and remove login/password need
+# Change PVdiary2 settings for dashboard accessible from anywhere and remove login/password need
+# Only use this in a trusted network, not the public internet
 RUN sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 RUN sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 

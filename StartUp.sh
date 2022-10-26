@@ -8,4 +8,5 @@ fi
     echo "Now starting CLI/dashboard & cron."
     sudo -u pvdiary2 toolbin --cliserver --start
     sudo -u pvdiary2 pvdiary --httpd --dashboard --start
-    cron >> /var/log/cron.log && tail -f /var/log/cron.log
+    /usr/sbin/cron >> /var/log/cron.log &
+    tail -f /var/log/cron.log

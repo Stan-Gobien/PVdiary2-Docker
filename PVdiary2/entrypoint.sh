@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
-ln -s /usr/local/bin/php /usr/bin/php
+
+if ! [ -L /usr/local/bin/php ]; then
+        ln -s /usr/local/bin/php /usr/bin/php
+fi
 
 ## Running passed command
 if [[ "$1" ]]; 

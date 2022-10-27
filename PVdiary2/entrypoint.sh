@@ -32,9 +32,9 @@ else
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --httpd --dashboard --start &
         sleep 2
 
-        /usr/sbin/cron >> /var/log/cron.log &
-        sudo -u pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 &
+        /usr/sbin/cron >> /home/pvdiary2/logs/cron.log &
+        sudo -u pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /home/pvdiary2/logs/cron.log 2>&1 &
 
-        tail -f /var/log/cron
+        tail -f /home/pvdiary2/logs/cron.log
 fi
 

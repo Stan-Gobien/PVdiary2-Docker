@@ -5,7 +5,7 @@ set -e
 if [[ "$1" ]]; then
         eval "$@"
 fi
-sleep 10
+sleep 30
 
 FILE=/var/.installfinished
 if [ -f "$FILE" ]; then

@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
+echo Entrypoint.sh start
 set -e
+
+echo Update SH files
+curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh /bin/entrypoint.sh
+curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh /bin/install.sh
+curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh /bin/firstrun.sh
+
 
 if ! [ -L /usr/local/bin/php ]; then
         ln -s /usr/local/bin/php /usr/bin/php
@@ -10,6 +17,7 @@ if [[ "$1" ]];
 then
         eval "$@"
 else
+
         sleep 20
         FILE=/var/.installfinished
         if [ -f "$FILE" ]; then

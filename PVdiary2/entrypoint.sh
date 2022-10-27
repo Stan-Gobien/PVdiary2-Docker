@@ -7,9 +7,9 @@ curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiar
 curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh
 curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh
 
-if ! [ -L /usr/local/bin/php ]; then
-        ln -s /usr/local/bin/php /usr/bin/php
-fi
+#if ! [ -L /usr/local/bin/php ]; then
+#        ln -s /usr/local/bin/php /usr/bin/php
+#fi
 
 ## Running passed command
 if [[ "$1" ]]; 

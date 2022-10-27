@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -e
+ln -s /usr/local/bin/php /usr/bin/php
+
 ## Running passed command
 if [[ "$1" ]]; 
 then

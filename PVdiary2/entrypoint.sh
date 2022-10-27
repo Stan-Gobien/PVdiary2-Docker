@@ -2,11 +2,10 @@
 echo Entrypoint.sh start
 set -e
 
-echo Update SH files
-curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh /bin/entrypoint.sh
-curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh /bin/install.sh
-curl -o  https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh /bin/firstrun.sh
-
+echo Update script files
+curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh
+curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh
+curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh
 
 if ! [ -L /usr/local/bin/php ]; then
         ln -s /usr/local/bin/php /usr/bin/php

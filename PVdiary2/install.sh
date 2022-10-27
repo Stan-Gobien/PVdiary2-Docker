@@ -34,19 +34,18 @@ ls -al /home/pvdiary2/ && ls -al /home/pvdiary2/incl/
 echo Use sed to make installer non-interactive proof
 sed -i 's/if (!self::g_ask_yn(" Continue with these/\/\/if (!self::g_ask_yn(" Continue with these/g' /home/pvdiary2/incl/tlbn__setup.php
 cd /home/pvdiary2
-sudo -u pvdiary2 mkdir /home/pvdiary2/temp
+sudo -u pvdiary2 mkdir /home/pvdiary2/bin
 chmod 777 /home/pvdiary2/temp
-sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --setup --CLI=/home/pvdiary2/temp
+sudo -u pvdiary2 php /home/pvdiary2/install_pvdiary.php --setup --CLI=/home/pvdiary2/bin
 
 echo List conent of /home/pvdiary2/temp for debug reasons
-ls -al /home/pvdiary2/temp
-cp -v /home/pvdiary2/temp/toolbin /usr/local/bin/toolbin
-cp -v /home/pvdiary2/temp/pvdiary /usr/local/bin/pvdiary
-chmod +x /usr/local/bin/pvdiary
-chmod +x /usr/local/bin/toolbin
+ls -al /home/pvdiary2/bin
+chmod +x /home/pvdiary2/bin/pvdiary
+chmod +x /home/pvdiary2/bin/toolbin
 
-echo List conent of /usr/local/bin/ for debug reasons
-ls -al /usr/local/bin/
+echo List conent of /home/pvdiary2/bin for debug reasons
+ls -alth /home/pvdiary2/bin
+export PATH=/home/pvdiary2/bin:$PATH
 
 echo Check PVdiary2 env
 sudo -u pvdiary2 /usr/local/bin/pvdiary --check-env
@@ -57,9 +56,9 @@ sed -i 's/localhost:8082/0.0.0.0:8082/g' /home/pvdiary2/g_toolbin_cfg.php
 sed -i "s/define('TOOLBIN_SOS',false)/define('TOOLBIN_SOS',true)/g" /home/pvdiary2/g_toolbin_cfg.php
 
 echo Cronjobs
-printf '@reboot pvdiary2 /usr/local/bin/pvdiary --autorun --run --sleep=20 >> /var/log/cron.log 2>&1 \n' > /etc/cron.d/pvdiary2
-printf '0 4 * * * pvdiary2 /usr/local/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2
-printf '0 12 * * 6 pvdiary2 /usr/local/bin/pvdiary --plugin=update-sw --code-php --code-www >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2
+printf '@reboot pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run --sleep=20 >> /var/log/cron.log 2>&1 \n' > /etc/cron.d/pvdiary2
+printf '0 4 * * * pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2
+printf '0 12 * * 6 pvdiary2 /home/pvdiary2/bin/pvdiary --plugin=update-sw --code-php --code-www >> /var/log/cron.log 2>&1 \n' >> /etc/cron.d/pvdiary2
 chmod 0644 /etc/cron.d/pvdiary2
 crontab /etc/cron.d/pvdiary2
 touch /var/log/cron.log

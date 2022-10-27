@@ -6,8 +6,9 @@ echo PHP time settings
 PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*')
 printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini
 
-echo Home dir
+echo dirs
 mkdir /home/pvdiary2
+mkdir -p usr/local/bin
 
 echo Create Group
 groupadd -g 5000 pvdiary2

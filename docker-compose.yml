@@ -16,3 +16,5 @@ services:
       - /tmp
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
+    ports:
+      - "8082:8082"      

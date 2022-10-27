@@ -40,7 +40,7 @@ else
         sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &
         sleep 2
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --httpd --dashboard --start &
-        sleep 2
+        sleep 300
 
         /usr/sbin/cron >> /home/pvdiary2/logs/cron.log &
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run >> /home/pvdiary2/logs/cron.log 2>&1 &

@@ -1,10 +1,10 @@
 echo Demo config PVdiary2
-sudo -u pvdiary2 pvdiary --plugin=config --create-demo
-sudo -u pvdiary2 pvdiary --db --make-tables --init
-sudo -u pvdiary2 pvdiary --import --start-date=day1
-sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
-sudo -u pvdiary2 pvdiary --plugin=config --show-cfg
-sudo -u pvdiary2 pvdiary --export --info --expected --top
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --plugin=config --create-demo
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --db --make-tables --init
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --import --start-date=day1
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --plugin=config --show-cfg
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --plugin=config --show-cfg
+sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --export --info --expected --top
 
 echo Autorun config
 sed -i "s/\; exec_at_start\[] = \"pvdiary / exec_at_start\[] = \"pvdiary /g" /home/pvdiary2/etc/pvdiary.cfg

@@ -12,18 +12,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /data/containers/pvdiary2/data:/home
-      - /data/containers/sbfspot/data/2021:/home/pvdiary2/var/pvdiary/csv/2021:ro
-      - /data/containers/sbfspot/data/2022:/home/pvdiary2/var/pvdiary/csv/2022:ro
-      - /data/containers/sbfspot/data/2023:/home/pvdiary2/var/pvdiary/csv/2023:ro
-      - /data/containers/sbfspot/data/2024:/home/pvdiary2/var/pvdiary/csv/2024:ro
-      - /data/containers/sbfspot/data/2025:/home/pvdiary2/var/pvdiary/csv/2025:ro
-      - /data/containers/sbfspot/data/2026:/home/pvdiary2/var/pvdiary/csv/2026:ro
-      - /data/containers/sbfspot/data/2027:/home/pvdiary2/var/pvdiary/csv/2027:ro
-      - /data/containers/sbfspot/data/2028:/home/pvdiary2/var/pvdiary/csv/2028:ro
-      - /data/containers/sbfspot/data/2029:/home/pvdiary2/var/pvdiary/csv/2029:ro
-      - /data/containers/sbfspot/data/2030:/home/pvdiary2/var/pvdiary/csv/2030:ro
-      - /data/containers/sbfspot/data/2031:/home/pvdiary2/var/pvdiary/csv/2031:ro
-      
+      - /data/containers/sbfspot/data:/home/pvdiary2/var/pvdiary/csv:ro      
     tmpfs:
       - /tmp
     labels:

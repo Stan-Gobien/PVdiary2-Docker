@@ -51,7 +51,7 @@ chmod +x /home/pvdiary2/bin/*
 
 echo List conent of /home/pvdiary2/bin for debug reasons
 ls -alth /home/pvdiary2/bin
-export PATH=/home/pvdiary2/bin:$PATH
+export PATH="/home/pvdiary2/bin:$PATH"
 
 echo Check PVdiary2 env
 sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --check-env

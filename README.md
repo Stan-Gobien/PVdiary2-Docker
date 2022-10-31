@@ -11,7 +11,7 @@ See: https://github.com/Stan-Gobien/sbfspot-Docker
 
 
 ## Setup
-The Dockerfile in the build/7-bullseye folder is used the create the image.
+The Dockerfile in the build/7-bullseye folder is used to create the image.
 
 The docker-compose file is used to create the stack with the image.
 

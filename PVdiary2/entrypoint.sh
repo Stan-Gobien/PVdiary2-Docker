@@ -7,17 +7,27 @@ curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiar
 curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh >/dev/null 2>&1
 curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh >/dev/null 2>&1
 
-#if ! [ -L /usr/local/bin/php ]; then
-#        ln -s /usr/local/bin/php /usr/bin/php
-#fi
-
 ## Running passed command
 if [[ "$1" ]]; 
 then
         eval "$@"
 else
-
-        sleep 20
+        echo Making sure executables are in the right locations
+        if ! [/usr/bin/php]
+        then
+                ln -s /usr/local/bin/php /usr/bin/php
+        fi
+        if ! [/usr/local/bin/pvdiary]
+        then
+                cp /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary
+        fi
+        if ! [/usr/local/bin/toolbin]
+        then
+               cp /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
+        fi   
+        ls -alth /usr/local/bin/  
+        
+        sleep 10
         FILE=/var/.installfinished
         if [ -f "$FILE" ]; then
             echo "PVDiary has already been installed. $FILE exists."
@@ -36,16 +46,11 @@ else
         fi
         sleep 5
 
-        export PATH="/home/pvdiary2/bin:$PATH"
-        echo $PATH
-        ls -alth /usr/local/bin/  
-
         echo "Now starting CLI/dashboard & cron."
-        sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &
-        sleep 2
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --httpd --dashboard --start &
-        sleep 300
-
+        sleep 5
+        sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &
+        sleep 5
         /usr/sbin/cron >> /home/pvdiary2/logs/cron.log &
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run >> /home/pvdiary2/logs/cron.log 2>&1 &
 

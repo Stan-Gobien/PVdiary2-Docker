@@ -10,7 +10,7 @@ The folder with those CSV files gets attached RO in this stack to process them i
 See: https://github.com/Stan-Gobien/sbfspot-Docker
 
 
-#Setup
+##Setup
 The Dockerfile in the build/7-bullseye folder is used the create the image.
 
 The docker-compose file is used to create the stack with the image.

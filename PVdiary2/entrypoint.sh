@@ -37,6 +37,7 @@ else
         sleep 5
 
         export PATH="/home/pvdiary2/bin:$PATH"
+        echo $PATH
         #ln -s /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
         #ln -s /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary    
 

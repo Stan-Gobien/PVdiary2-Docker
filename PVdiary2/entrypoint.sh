@@ -37,8 +37,8 @@ else
         sleep 5
 
         export PATH="/home/pvdiary2/bin:$PATH"
-        ln -s /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
-        ln -s /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary    
+        #ln -s /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
+        #ln -s /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary    
 
         echo "Now starting CLI/dashboard & cron."
         sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &

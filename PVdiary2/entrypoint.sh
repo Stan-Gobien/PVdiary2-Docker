@@ -19,7 +19,8 @@ else
         
         sleep 10
         FILE=/var/.installfinished
-        if [ -f "$FILE" ]; then
+        if [ -f "$FILE" ]
+        then
             echo "PVDiary has already been installed. $FILE exists."
         else
             echo "Running PVdiary installation via install.sh"
@@ -28,7 +29,8 @@ else
         sleep 5
 
         FILE=/home/pvdiary2/.firstrunfinished
-        if [ -f "$FILE" ]; then
+        if [ -f "$FILE" ]
+        then
             echo "PVdiary has already been configured. $FILE exists."
         else 
             echo "Running PVdiary configuration via FirstRun.sh"

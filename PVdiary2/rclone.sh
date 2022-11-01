@@ -1,7 +1,7 @@
 #!/bin/bash
 #needs to be run as the pvdiary2 user
 
-export OBSCURED_PASS=`rclone obscure $RCLONE_PASS`
+export OBSCURED_PASS=`/usr/bin/rclone obscure $RCLONE_PASS`
 
 mkdir ~/.config
 mkdir ~/.config/rclone

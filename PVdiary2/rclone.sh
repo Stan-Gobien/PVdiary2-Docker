@@ -1,11 +1,10 @@
 #!/bin/bash
 #needs to be run as the pvdiary2 user
 
-export OBSCURED_PASS=`/usr/bin/rclone obscure $RCLONE_PASS`
-
-mkdir ~/.config
-mkdir ~/.config/rclone
-cat > ~/.config/rclone/rclone.conf << EOF
+sudo -u pvdiary2 OBSCURED_PASS=`/usr/bin/rclone obscure $RCLONE_PASS`
+sudo -u pvdiary2 mkdir ~/.config
+sudo -u pvdiary2 mkdir ~/.config/rclone
+sudo -u pvdiary2 cat > ~/.config/rclone/rclone.conf << EOF
 [pvdiary]
 type = $RCLONE_TYPE
 host = $RCLONE_HOST

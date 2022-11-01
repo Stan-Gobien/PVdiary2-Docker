@@ -8,6 +8,7 @@ curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiar
 curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh --no-progress-meter
 curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh --no-progress-meter
 curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/rclone.sh --no-progress-meter
+chmod +x /bin/entrypoint.sh && chmod +x /bin/install.sh && chmod +x /bin/firstrun.sh && chmod +x /bin/rclone.sh
 
 ## Running passed command
 if [[ "$1" ]]; 

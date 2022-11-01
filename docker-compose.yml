@@ -13,6 +13,13 @@ services:
       - /data/containers/sbfspot/data:/home/pvdiary2/var/pvdiary/csv:ro      
     tmpfs:
       - /tmp
+    environment:
+      RCLONE_TYPE: "ftp"
+      RCLONE_HOST: "${RCLONE_HOST}"
+      RCLONE_USER: "${RCLONE_USER}"
+      RCLONE_PASS: "${RCLONE_PASS}"
+      RCLONE_EXPLICIT_TLS: "true"
+      RCLONE_NO_CHECK_CERT: "false"
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     ports:

@@ -2,10 +2,12 @@
 echo Entrypoint.sh start
 set -e
 
-echo Update script files
+echo Update script files from Github
+#You can disable this for security reasons
 curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh --no-progress-meter
 curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh --no-progress-meter
 curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh --no-progress-meter
+curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/rclone.sh --no-progress-meter
 
 ## Running passed command
 if [[ "$1" ]]; 
@@ -33,10 +35,20 @@ else
         then
             echo "PVdiary has already been configured. $FILE exists."
         else 
-            echo "Running PVdiary configuration via FirstRun.sh"
+            echo "Running PVdiary configuration via firstrun.sh"
             /bin/firstrun.sh
         fi
         sleep 5
+        
+        FILE=/home/pvdiary2/.config/rclone/rclone.conf
+        if [ -f "$FILE" ]
+        then
+            echo "rclone has already been configured. $FILE exists."
+        else 
+            echo "Creating rclone.config via rclone.sh"
+            /bin/rclone.sh
+        fi
+        sleep 5        
 
         echo "Now starting CLI/dashboard & cron."
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --httpd --dashboard --start &

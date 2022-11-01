@@ -17,11 +17,11 @@ else
         then
                 ln -s /usr/local/bin/php /usr/bin/php
         fi        
-        if ! [ -e /usr/local/bin/pvdiary]
+        if ! [ -e /usr/local/bin/pvdiary ]
         then
                 cp /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary
         fi
-        if ! [ -e /usr/local/bin/toolbin]
+        if ! [ -e /usr/local/bin/toolbin ]
         then
                cp /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
         fi   

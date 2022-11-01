@@ -13,19 +13,9 @@ then
         eval "$@"
 else
         echo Making sure executables are in the right locations
-        if ! [ -L /usr/bin/php ]
-        then
-                ln -s /usr/local/bin/php /usr/bin/php
-        fi        
-        if ! [ -e /usr/local/bin/pvdiary ]
-        then
-                cp /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary
-        fi
-        if ! [ -e /usr/local/bin/toolbin ]
-        then
-               cp /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin
-        fi   
-        ls -alth /usr/local/bin/  
+        if ! [ -L /usr/bin/php ] ; then ln -s /usr/local/bin/php /usr/bin/php ; fi        
+        if ! [ -e /usr/local/bin/pvdiary ] ; then cp /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary ; fi
+        if ! [ -e /usr/local/bin/toolbin ] ; then cp /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin ; fi
         
         sleep 10
         FILE=/var/.installfinished

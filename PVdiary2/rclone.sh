@@ -4,7 +4,7 @@ mkdir ~/.config
 mkdir ~/.config/rclone
 cat > ~/.config/rclone/rclone.conf << EOF
 [pvdiary]
-type = $RCLONE_type
+type = $RCLONE_TYPE
 host = $RCLONE_HOST
 user = $RCLONE_USER
 pass = $RCLONE_PASS

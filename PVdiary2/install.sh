@@ -74,5 +74,8 @@ printf '0 12 * * 6 pvdiary2 /home/pvdiary2/bin/pvdiary --plugin=update-sw --code
 chmod 0644 /etc/cron.d/pvdiary2
 crontab /etc/cron.d/pvdiary2
 
+echo Install rclone
+curl https://rclone.org/install.sh | sudo bash
+
 echo Create file to let startup know install is finished
 touch /var/.installfinished

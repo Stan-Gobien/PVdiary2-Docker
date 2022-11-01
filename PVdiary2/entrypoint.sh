@@ -13,10 +13,6 @@ then
         eval "$@"
 else
         echo Making sure executables are in the right locations
-#        if ! [ -L /usr/bin/php ] && [ -e /usr/bin/php ]
-#        then
-#                ln -s /usr/local/bin/php /usr/bin/php
-#        fi
         if ! [/usr/local/bin/pvdiary]
         then
                 cp /home/pvdiary2/bin/pvdiary /usr/local/bin/pvdiary

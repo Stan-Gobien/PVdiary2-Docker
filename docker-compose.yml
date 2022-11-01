@@ -2,18 +2,21 @@ version: '2.9'
 services:
   pvdiary2:
   # https://docs.portainer.io/v/ce-2.9/faq/troubleshooting/can-i-build-an-image-while-deploying-a-stack-application-from-git
-  # Workaround for Portainer: Use the link to the build file in the portainer build image editor and name it pvdiary2:bullseye
-  # Then deploy the stack succesfully
+  # Workaround for Portainer: Use the Dockerfile link in the portainer build image editor and name it pvdiary2:bullseye
+  # Then after deploy this stack succesfully in Portainer
+  # When using CLI the image will get built on-the-fly when you launch this with docker-compose up
     build: https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/Dockerfile
     image: pvdiary2:bullseye
     restart: always
     volumes:
+    # Adjust the local paths to your preference
       - /etc/localtime:/etc/localtime:ro
       - /data/containers/pvdiary2/data:/home
       - /data/containers/sbfspot/data:/home/pvdiary2/var/pvdiary/csv:ro      
     tmpfs:
       - /tmp
     environment:
+    # Use environment variables in Portainer or in the shell to define host, user & pass
       RCLONE_TYPE: "ftp"
       RCLONE_HOST: "${RCLONE_HOST}"
       RCLONE_USER: "${RCLONE_USER}"

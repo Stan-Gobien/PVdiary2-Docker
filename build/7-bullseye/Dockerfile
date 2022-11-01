@@ -4,7 +4,7 @@ FROM php:7-bullseye
 ADD https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/resolv.conf /etc/resolv.conf
 
 #Packages
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps rclone && apt-get clean
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps && apt-get clean
 
 #PHP extensions
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/

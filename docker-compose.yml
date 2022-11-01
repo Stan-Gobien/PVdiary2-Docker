@@ -18,6 +18,7 @@ services:
     environment:
     # Use environment variables in Portainer or in the shell to define host, user & pass
     # Delete the /home/pvdiary2/.config/rclone/rclone.conf file if you change these parameters to recreate the config
+    # sync_params = "rclone://pvdiary:pvdiary"
       RCLONE_TYPE: "ftp"
       RCLONE_HOST: "${RCLONE_HOST}"
       RCLONE_USER: "${RCLONE_USER}"

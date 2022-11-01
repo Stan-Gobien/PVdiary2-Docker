@@ -47,7 +47,7 @@ else
             echo "rclone has already been configured. $FILE exists."
         else 
             echo "Creating rclone.config via rclone.sh"
-            /bin/rclone.sh
+            sudo -u pvdiary2 /bin/rclone.sh
         fi
         sleep 5        
 
@@ -56,9 +56,9 @@ else
         sleep 5
         sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &
         sleep 5
+        
         /usr/sbin/cron >> /home/pvdiary2/logs/cron.log &
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run >> /home/pvdiary2/logs/cron.log 2>&1 &
 
         tail -f /home/pvdiary2/logs/cron.log
 fi
-

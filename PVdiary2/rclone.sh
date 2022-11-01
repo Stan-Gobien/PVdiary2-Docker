@@ -1,4 +1,5 @@
 #!/bin/bash
+#needs to be run as the pvdiary2 user
 mkdir ~/.config
 mkdir ~/.config/rclone
 cat > ~/.config/rclone/rclone.conf << EOF

@@ -3,14 +3,16 @@ echo Entrypoint.sh start
 set -e
 
 echo Update script files from Github
-#You can disable this for security reasons
-curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/entrypoint.sh --no-progress-meter
-curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/install.sh --no-progress-meter
-curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/firstrun.sh --no-progress-meter
-curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/PVdiary2/rclone.sh --no-progress-meter
-chmod +x /bin/entrypoint.sh && chmod +x /bin/install.sh && chmod +x /bin/firstrun.sh && chmod +x /bin/rclone.sh
+#You can disable this for security reasons or use your own repo with script files
 
-## Running passed command
+curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh --no-progress-meter
+curl -o  /bin/dependencies.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/dependencies.sh --no-progress-meter
+curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/install.sh --no-progress-meter
+curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/firstrun.sh --no-progress-meter
+curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/rclone.sh --no-progress-meter
+chmod +x /bin/entrypoint.sh && chmod +x /bin/dependencies.sh && chmod +x /bin/install.sh && chmod +x /bin/firstrun.sh && chmod +x /bin/rclone.sh
+
+## Running passed command via exec
 if [[ "$1" ]]; 
 then
         eval "$@"
@@ -21,6 +23,16 @@ else
         if ! [ -e /usr/local/bin/toolbin ] ; then cp /home/pvdiary2/bin/toolbin /usr/local/bin/toolbin ; fi
         
         sleep 10
+        FILE=/var/.dependenciesfinished
+        if [ -f "$FILE" ]
+        then
+            echo "Dependencies already installed. $FILE exists."
+        else
+            echo "Running dependencies installation via dependencies.sh"
+            /bin/dependencies.sh
+        fi
+        sleep 5
+        
         FILE=/var/.installfinished
         if [ -f "$FILE" ]
         then

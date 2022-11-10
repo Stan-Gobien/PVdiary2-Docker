@@ -14,13 +14,13 @@ See: https://github.com/Stan-Gobien/sbfspot-Docker
 Create the folders.
 If you change the paths remember to adjust the docker-compose.yml to reflect that.
 
-  mkdir -p /data/containers/pvdiary2/data/
-  mkdir -p /data/containers/pvdiary2/scripts/
+    mkdir -p /data/containers/pvdiary2/data/
+    mkdir -p /data/containers/pvdiary2/scripts/
 
 Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. Make sure its executable.
 
-  curl -o /data/containers/pvdiary2/scripts/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh
-  chmod +x /data/containers/pvdiary2/scripts/entrypoint.sh
+    curl -o /data/containers/pvdiary2/scripts/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh
+    chmod +x /data/containers/pvdiary2/scripts/entrypoint.sh
 
 
 At the start of the container, the entrypoint.sh script will get executed.<br>

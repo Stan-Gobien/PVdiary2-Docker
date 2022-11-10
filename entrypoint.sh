@@ -5,11 +5,11 @@ set -e
 echo Update script files from Github
 #You can disable this for security reasons or use your own repo with script files
 
-curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh --no-progress-meter
-curl -o  /bin/dependencies.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/dependencies.sh --no-progress-meter
-curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/install.sh --no-progress-meter
-curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/firstrun.sh --no-progress-meter
-curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/rclone.sh --no-progress-meter
+curl -o  /bin/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/entrypoint.sh --no-progress-meter
+curl -o  /bin/dependencies.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/dependencies.sh --no-progress-meter
+curl -o  /bin/install.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/install.sh --no-progress-meter
+curl -o  /bin/firstrun.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/firstrun.sh --no-progress-meter
+curl -o  /bin/rclone.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/rclone.sh --no-progress-meter
 chmod +x /bin/entrypoint.sh && chmod +x /bin/dependencies.sh && chmod +x /bin/install.sh && chmod +x /bin/firstrun.sh && chmod +x /bin/rclone.sh
 
 ## Running passed command via exec
@@ -68,6 +68,8 @@ else
         sleep 5
         sudo -u pvdiary2 /home/pvdiary2/bin/toolbin --cliserver --start &
         sleep 5
+        
+        echo "You can ignore the next error about PID in use"
         
         /usr/sbin/cron >> /home/pvdiary2/logs/cron.log &
         sudo -u pvdiary2 /home/pvdiary2/bin/pvdiary --autorun --run >> /home/pvdiary2/logs/cron.log 2>&1 &

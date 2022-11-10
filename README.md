@@ -11,20 +11,27 @@ See: https://github.com/Stan-Gobien/sbfspot-Docker
 
 
 ## Setup
-The Dockerfile in the build/7-bullseye folder is used to create the image.
+Create the folders.
+If you change the paths remember to adjust the docker-compose.yml to reflect that.
 
-The docker-compose file is used to create the stack using the built image.
+  mkdir -p /data/containers/pvdiary2/data/
+  mkdir -p /data/containers/pvdiary2/scripts/
 
-When using portainer you have to build the image first manually.
+Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. Make sure its executable.
 
-In the PVdiary2 folder are the script assets.
+  curl -o /data/containers/pvdiary2/scripts/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh
+  chmod +x /data/containers/pvdiary2/scripts/entrypoint.sh
 
-At the start of the container PVdiary will be installed using the install.sh script.
 
-Afterwards a demo configuration will be setup in PVdiary using the firstrun.sh script.
+At the start of the container, the entrypoint.sh script will get executed.<br>
+The entrypoint.sh script will first download the other scripts.
 
-An rclone config will be set (for FTP) using the rclone.sh script and reading the env variabeles for user/pass/host.
+Dependencies will be installed using the dependencies.sh script.
 
-The entrypoint.sh script is the main script that gets executed at start and governs all.
+PVdiary will be installed using the install.sh script. <br>
+A demo configuration will be setup in PVdiary using the firstrun.sh script. <br>
+An rclone config will be set (for FTP) using the rclone.sh script and reading the env variabeles for user/pass/host. <br>
 
-Read the scripts to see what it all does (PVdiary2 folder).
+The entrypoint.sh script will then execute the normal startup of pvdiary.
+
+Read the scripts to see what it all does.

@@ -52,4 +52,4 @@ An rclone config will be set (for FTP) using the rclone.sh script and reading th
 
 The entrypoint.sh script will then execute the normal startup of pvdiary.
 
-### Read the scripts to see what it all does.
+#### Read the scripts to see what it all does.

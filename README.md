@@ -31,7 +31,7 @@ Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. M
 If you use portaine then paste the content of docker-compose.yml in a new stack,<br>
 or you can create the stack in portainer with the URL of the file on Github.
 
-### CLI with docker-compose
+### or CLI with docker-compose
 
 You can of course also download the docker-compose.yml file and put it in /data/containers/pvdiary2/<br>
 The -d option starts the stack in background mode so it keeps running if you close your shell.

@@ -19,7 +19,7 @@ I use absolute paths because if prefer deploying my compose stacks using portain
     mkdir -p /data/containers/pvdiary2/data/
     mkdir -p /data/containers/pvdiary2/scripts/
 
-Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. Make sure its executable.
+Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. Make it executable.
 
     curl -o /data/containers/pvdiary2/scripts/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh
     chmod +x /data/containers/pvdiary2/scripts/entrypoint.sh

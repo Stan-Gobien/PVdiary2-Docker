@@ -12,6 +12,8 @@ See: https://github.com/Stan-Gobien/sbfspot-Docker
 
 ## Setup
 
+### Preparations
+
 Create the folders.<br>
 If you change the paths remember to adjust the docker-compose.yml to reflect that.<br>
 I use absolute paths because if prefer deploying my compose stacks using portainer.
@@ -24,14 +26,20 @@ Put the entrypoint.sh script in the /data/containers/pvdiary2/scripts/ folder. M
     curl -o /data/containers/pvdiary2/scripts/entrypoint.sh https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/entrypoint.sh
     chmod +x /data/containers/pvdiary2/scripts/entrypoint.sh
 
+### Portainer
+
 If you use portaine then paste the content of docker-compose.yml in a new stack,<br>
 or you can create the stack in portainer with the URL of the file on Github.
+
+### CLI with docker-compose
 
 You can of course also download the docker-compose.yml file and put it in /data/containers/pvdiary2/<br>
 The -d option starts the stack in background mode so it keeps running if you close your shell.
 
     curl -o /data/containers/pvdiary2/docker-compose.yml https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/dev/docker-compose.yml
     cd /data/containers/pvdiary2/ && docker-compose up -d
+
+### Start the stack with the container
 
 At the start of the container, the entrypoint.sh script will get executed.<br>
 The entrypoint.sh script will first download the other scripts.

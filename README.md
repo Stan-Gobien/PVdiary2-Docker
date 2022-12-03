@@ -1,6 +1,5 @@
 # PVdiary2-Docker
 
-Still in early devlopment.
 Still learning about Docker images.
 
 I have another stack/container running SBFspot and generating the CSV files.

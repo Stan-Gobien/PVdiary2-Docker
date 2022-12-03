@@ -12,7 +12,7 @@ services:
     tmpfs:
       - /tmp
     environment:
-      TIMEZONE: "Europe/Brussels"
+      TIMEZONE: Europe/Brussels
     # Use environment variables in Portainer or in the shell to define RCLONE_HOST, RCLONE_USER & RCLONE_PASS
     # Delete the /home/pvdiary2/.config/rclone/rclone.conf file if you change these parameters to recreate the config
     # sync_params = "rclone://pvdiary:pvdiary"

@@ -50,7 +50,7 @@ An rclone config will be set (for FTP) using the rclone.sh script and reading th
 <br>
 If you did not set the environment variables in your shell or in Portainer then rclone config will not be made. <br>
 <br>
-See stack_portainer.png for an example of deploying this in portainer with environment variables.<br>
+See [stack_portainer.png](https://github.com/Stan-Gobien/PVdiary2-Docker/blob/main/stack-portainer.png) for an example of deploying this in portainer with environment variables.<br>
 <br>
 The entrypoint.sh script will then execute the normal startup of pvdiary.<br>
 <br>

@@ -12,7 +12,6 @@ curl -o /usr/local/bin/install-php-extensions https://raw.githubusercontent.com/
 chmod +x /usr/local/bin/install-php-extensions 
 /usr/local/bin/install-php-extensions zip
 
-echo "Create file to let startup know entrypoint is finished"
+echo "Create file to indicate dependencies.sh is finished"
 touch /var/.dependenciesfinished
-
-sleep 30
+sleep 5

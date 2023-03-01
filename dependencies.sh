@@ -4,7 +4,8 @@ curl -o  /etc/resolv.conf https://raw.githubusercontent.com/Stan-Gobien/PVdiary2
 
 #Packages
 echo "Install packages"
-apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps zip unzip php7.4-zip && apt-get clean
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps zip unzip && apt-get clean
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y php7.4-zip && apt-get clean
 
 #PHP extensions
 echo "Install php extension"

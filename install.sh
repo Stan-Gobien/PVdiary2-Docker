@@ -1,5 +1,5 @@
 echo Time settings
-TZ=Europe/Brussels
+TZ=${TIMEZONE}
 dpkg-reconfigure -f noninteractive tzdata
 
 echo PHP symlink
@@ -10,7 +10,7 @@ fi
 
 echo PHP time settings
 PHPCONFPATH=$(php -i | grep 'additional .ini files' |  grep -o '/[^ ]*')
-printf '[PHP]\ndate.timezone = \"Europe/Brussels\"\n' > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini
+printf "[PHP]\ndate.timezone = \"${TIMEZONE}\"\n" > $PHPCONFPATH/90-timezone.ini && cat $PHPCONFPATH/90-timezone.ini
 
 
 echo Create Group
@@ -77,5 +77,5 @@ crontab /etc/cron.d/pvdiary2
 echo Install rclone
 curl https://rclone.org/install.sh | sudo bash
 
-echo Create file to let startup know install is finished
+echo Create file to let entrypoint know install is finished
 touch /var/.installfinished

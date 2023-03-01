@@ -38,7 +38,7 @@ The -d option starts the stack in background mode so it keeps running if you clo
     curl -o /data/containers/pvdiary2/docker-compose.yml https://raw.githubusercontent.com/Stan-Gobien/PVdiary2-Docker/main/docker-compose.yml
     cd /data/containers/pvdiary2/ && docker-compose up -d
 
-### Start the stack with the container
+### Startup
 
 At the start of the container, the entrypoint.sh script will get executed.<br>
 The entrypoint.sh script will first download the other scripts.

@@ -14,4 +14,4 @@ chmod +x /usr/local/bin/install-php-extensions && install-php-extensions zip
 echo "Create file to let startup know entrypoint is finished"
 touch /var/.dependenciesfinished
 
-sleep 60
+sleep 30

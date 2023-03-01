@@ -43,14 +43,15 @@ The -d option starts the stack in background mode so it keeps running if you clo
 At the start of the container, the entrypoint.sh script will get executed.<br>
 The entrypoint.sh script will first download the other scripts.
 
-Dependencies will be installed using the dependencies.sh script.
-
+Dependencies will be installed using the dependencies.sh script. <br>
 PVdiary will be installed using the install.sh script. <br>
 A demo configuration will be setup in PVdiary using the firstrun.sh script. <br>
 An rclone config will be set (for FTP) using the rclone.sh script and reading the env variables for user/pass/host. <br>
+<br>
 If you did not set the environment variables in your shell or in Portainer then rclone config will not be made. <br>
-See stack_portainer.png for an example
-
-The entrypoint.sh script will then execute the normal startup of pvdiary.
-
-#### Read the scripts to see what they all do. I made the scripts easy to follow.
+<br>
+See stack_portainer.png for an example of deploying this in portainer with environment variables.<br>
+<br>
+The entrypoint.sh script will then execute the normal startup of pvdiary.<br>
+<br>
+### Read the scripts to see what they all do. I made the scripts easy to follow.

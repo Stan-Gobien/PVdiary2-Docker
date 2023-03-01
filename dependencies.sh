@@ -4,7 +4,7 @@ curl -o  /etc/resolv.conf https://raw.githubusercontent.com/Stan-Gobien/PVdiary2
 
 #Packages
 echo "Install packages"
-apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps zip unzip php-zip && apt-get clean
+apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y sudo sed cron vim procps zip unzip php7.4-zip && apt-get clean
 
 #PHP extensions
 echo "Install php extension"
@@ -13,4 +13,5 @@ chmod +x /usr/local/bin/install-php-extensions && install-php-extensions zip
 
 echo "Create file to let startup know entrypoint is finished"
 touch /var/.dependenciesfinished
+
 sleep 60

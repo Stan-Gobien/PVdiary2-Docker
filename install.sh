@@ -77,5 +77,5 @@ crontab /etc/cron.d/pvdiary2
 echo Install rclone
 curl https://rclone.org/install.sh | sudo bash
 
-echo "Create file to indicate install.sh is finished"
+echo "Create file to indicate install.sh has run"
 touch /var/.installfinished

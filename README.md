@@ -48,6 +48,8 @@ Dependencies will be installed using the dependencies.sh script.
 PVdiary will be installed using the install.sh script. <br>
 A demo configuration will be setup in PVdiary using the firstrun.sh script. <br>
 An rclone config will be set (for FTP) using the rclone.sh script and reading the env variables for user/pass/host. <br>
+If you did not set the necessary environment variables in your shell or in Portainer then rclone config will not be made.
+See stack_portainer.png for an example
 
 The entrypoint.sh script will then execute the normal startup of pvdiary.
 

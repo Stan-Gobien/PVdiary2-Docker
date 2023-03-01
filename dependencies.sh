@@ -10,7 +10,8 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y php7.4-zip &
 #PHP extensions
 echo "Install php extension"
 curl -o /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions --no-progress-meter
-chmod +x /usr/local/bin/install-php-extensions && install-php-extensions zip
+chmod +x /usr/local/bin/install-php-extensions 
+/usr/local/bin/install-php-extensions zip
 
 echo "Create file to let startup know entrypoint is finished"
 touch /var/.dependenciesfinished

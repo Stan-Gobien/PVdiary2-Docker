@@ -26,3 +26,4 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     ports:
       - "8082:8082"      
+#end

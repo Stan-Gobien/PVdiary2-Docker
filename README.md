@@ -53,5 +53,8 @@ If you did not set the environment variables in your shell or in Portainer then 
 See [example-stack-portainer.png](https://github.com/Stan-Gobien/PVdiary2-Docker/blob/main/example-stack-portainer.png) for an example of deploying this in portainer with environment variables.<br>
 <br>
 The entrypoint.sh script will then execute the normal startup of pvdiary.<br>
+The dashboard web UI can be reached on port 8082<br>
+Don't use this config on the public internet, because I removed the user/password need for the dashboard.<br>
+you can ofcourse set this back in the framework admin.<br>
 <br>
 ### Read the scripts to see what they all do. I made the scripts easy to follow.

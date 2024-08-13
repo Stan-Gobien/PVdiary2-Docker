@@ -2,6 +2,8 @@
 
 Still learning about Docker images.
 
+## Prerequisites
+
 I have another container running SBFspot and generating the CSV files.
 
 The folder with those CSV files gets attached ReadOnly in this container to process them in PVdiary2

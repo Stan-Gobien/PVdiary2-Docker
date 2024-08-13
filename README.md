@@ -17,7 +17,7 @@ See: https://github.com/Stan-Gobien/sbfspot-Docker
 
 Create the folders.<br>
 If you change the paths remember to adjust the docker-compose.yml to reflect that.<br>
-I use absolute paths because if prefer deploying my compose stacks using portainer.
+I use absolute paths because I prefer deploying my compose stacks using portainer.
 
     mkdir -p /data/containers/pvdiary2/data/
     mkdir -p /data/containers/pvdiary2/scripts/
